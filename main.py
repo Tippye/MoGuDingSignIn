@@ -10,6 +10,11 @@ from utils import computeSign
 
 # 上班/下班 START/END
 State = "START"
+DatabasePath = ""
+DatabaseUser = "moguding"
+DatabasePwd = "2XcTdSR6CirJYHfd"
+Database = "moguding"
+
 
 loginURL = URLObject("https://api.moguding.net:9000/session/user/v1/login")
 signInURL = URLObject("https://api.moguding.net:9000/attendence/clock/v2/save")
@@ -167,7 +172,7 @@ if __name__ == '__main__':
     connection = None
 
     try:
-        connection = pymysql.connect(host="47.105.183.120", user="moguding", password="2XcTdSR6CirJYHfd", db="moguding",
+        connection = pymysql.connect(host=DatabasePath, user=DatabaseUser, password=DatabasePwd, db=Database,
                                      charset="utf8mb4")
         cursor = connection.cursor()
         sql = "SELECT * FROM user"
