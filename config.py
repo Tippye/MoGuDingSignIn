@@ -1,5 +1,7 @@
 from urlobject import URLObject
 
+dev = False
+
 # 数据库配置
 DatabasePath = "47.105.183.120"
 DatabaseUser = "moguding"
@@ -12,7 +14,6 @@ signInURL = URLObject("https://api.moguding.net:9000/attendence/clock/v2/save")
 planIdURL = URLObject("https://api.moguding.net:9000/practice/plan/v3/getPlanByStu")
 weekReportURL = URLObject("https://api.moguding.net:9000/practice/paper/v2/save")
 weekReportListURL = URLObject("https://api.moguding.net:9000/practice/paper/v2/listByStu")
-# monthReportURL = URLObject("")
 
 # http请求头部信息。
 Accept_Language = "zh-CN,zh;q=0.8"

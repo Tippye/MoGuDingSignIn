@@ -1,8 +1,7 @@
 import hashlib
+import re
 
-import pymysql
-
-from config import *
+from mail import send_mail
 
 base = [str(x) for x in range(10)] + [chr(x) for x in range(ord('A'), ord('A') + 6)]
 
@@ -34,26 +33,15 @@ def compute_sign(str):
     return md.hexdigest()
 
 
-def get_users():
+def notice(notice, content):
     """
-    从数据库获取用户信息
+    通知
+    :param notice:
+    :param content:
     :return:
     """
-    connection = None
-
-    try:
-        connection = pymysql.connect(host=DatabasePath, user=DatabaseUser, password=DatabasePwd, db=Database,
-                                     charset="utf8mb4")
-        cursor = connection.cursor()
-        sql = "SELECT * FROM user"
-        cursor.execute(sql)
-
-        return cursor.fetchall()
-    except Exception as e:
-        print("链接数据库出现错误：")
-        print("\t" + str(e))
-        return None
-
-
-def err_notice():
-    pass
+    if notice is None:
+        return
+    mail_str = r'^[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+){0,4}@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+){0,4}$'
+    if re.match(mail_str, notice):
+        send_mail(content, "工学云签到错误", "Tippy_q@163.com", notice, notice)
